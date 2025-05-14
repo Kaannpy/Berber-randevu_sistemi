@@ -1,0 +1,18 @@
+@model KuaforRandevuSistemi.Models.Service
+
+@{
+    ViewData["Title"] = "İşlem Sil";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>Bu işlemi silmek istediğinize emin misiniz?</h3>
+<div>
+    <h4>@Model.Name - @Model.Price ₺</h4>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Sil</button>
+        <a asp-action="Index" class="btn btn-secondary">İptal</a>
+    </form>
+</div>

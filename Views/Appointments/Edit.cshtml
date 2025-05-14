@@ -1,0 +1,59 @@
+@model KuaforRandevuSistemi.Models.Appointment
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Randevu Düzenle";
+    var userId = UserManager.GetUserId(User);
+}
+
+<h2>Randevu Düzenle</h2>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="UserId" value="@userId" />
+    
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="StaffId" class="control-label">Personel</label>
+        <select asp-for="StaffId" class="form-control" asp-items="ViewBag.Staffs">
+            <option value="">-- Seçiniz --</option>
+        </select>
+        <span asp-validation-for="StaffId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ServiceId" class="control-label">İşlem</label>
+        <select asp-for="ServiceId" class="form-control" asp-items="ViewBag.Services">
+            <option value="">-- Seçiniz --</option>
+        </select>
+        <span asp-validation-for="ServiceId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AppointmentDate" class="control-label">Tarih ve Saat</label>
+        <input asp-for="AppointmentDate" type="datetime-local" class="form-control" />
+        <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+        <a asp-action="Index" class="btn btn-secondary">Geri Dön</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+        <script>
+            $(document).ready(function () {
+                $("form").on("submit", function () {
+                    console.log("Form gönderiliyor...");
+                    console.log("UserId: " + $("input[name='UserId']").val());
+                });
+            });
+        </script>
+}

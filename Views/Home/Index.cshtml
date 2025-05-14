@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="home-hero">
+    <div class="hero-content">
+        <h1 class="display-4">Anatolian Kaan Berber</h1>
+        <p class="lead">Profesyonel saç ve sakal tıraşı hizmetleri</p>
+        <a href="@Url.Action("Create", "Appointments")" class="btn btn-primary btn-lg mt-3">
+            <i class="fas fa-calendar-check me-2"></i>Hemen Randevu Al
+        </a>
+    </div>
+</div>
+
+<div class="barber-pole-divider my-5"></div>
+
+<div class="row services-section">
+    <div class="col-md-4 mb-4">
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-cut"></i>
+            </div>
+            <h3>Saç Kesimi</h3>
+            <p>Modern ve klasik saç kesim hizmetlerimizle tarzınızı yansıtın.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-shower"></i>
+            </div>
+            <h3>Sakal Tıraşı</h3>
+            <p>Profesyonel sakal şekillendirme ve bakım hizmetlerimizle fark yaratın.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-paint-brush"></i>
+            </div>
+            <h3>Saç Boyama</h3>
+            <p>Uzman kadromuzla saçlarınıza yeni bir renk ve hayat kazandırın.</p>
+        </div>
+    </div>
+</div>
+
+<div class="barber-pole-divider my-5"></div>
+
+<div class="about-section">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/images/barber-pattern.png" alt="Berber Salonu" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-6">
+            <h2>Hakkımızda</h2>
+            <p>
+                Anatolian Kaan Berber olarak, yılların tecrübesi ve modern yaklaşımlarla sizlere en kaliteli hizmeti
+                sunmaktan gurur duyuyoruz. Salonumuzda, sıcak atmosfer ve uzman kadromuzla, kendinizi özel
+                hissedeceğiniz
+                bir deneyim yaşamanız için çalışıyoruz.
+            </p>
+            <p>
+                Sizin memnuniyetiniz, bizim önceliğimizdir. En kaliteli ürünler ve en son trendlerle,
+                beklentilerinizin ötesinde bir hizmet sunmak için buradayız.
+            </p>
+            <a href="@Url.Action("Index", "Services")" class="btn btn-outline-primary mt-3">
+                <i class="fas fa-list-alt me-2"></i>Fiyat Listemizi İnceleyin
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="barber-pole-divider my-5"></div>
+
+<div class="testimonials-section">
+    <h2 class="text-center mb-4">Müşteri Yorumları</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="testimonial-content">
+                    <p>"Harika bir deneyimdi. Personel çok profesyonel ve sonuç beklediğimden çok daha iyi oldu."</p>
+                    <h5>Ahmet Y.</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="testimonial-content">
+                    <p>"Her zaman memnun ayrıldığım tek berber. Kesinlikle tavsiye ediyorum."</p>
+                    <h5>Mehmet S.</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="testimonial-content">
+                    <p>"Sakal şekillendirmede uzmanlar. Artık başka bir yere gitmem mümkün değil."</p>
+                    <h5>Emre K.</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cta-section text-center my-5 p-5">
+    <h2>Bugün Randevu Alın</h2>
+    <p class="lead">Profesyonel hizmetlerimiz için hemen yerinizi ayırtın</p>
+    <a href="@Url.Action("Create", "Appointments")" class="btn btn-primary btn-lg mt-3">
+        <i class="fas fa-calendar-check me-2"></i>Randevu Al
+    </a>
+</div>

@@ -1,0 +1,16 @@
+@model KuaforRandevuSistemi.Models.Appointment
+
+@{
+    ViewData["Title"] = "Randevuyu İptal Et";
+}
+
+<h2>Randevuyu İptal Et</h2>
+
+<h4>@Model.Service?.Name - @Model.AppointmentDate.ToString("dd.MM.yyyy HH:mm")</h4>
+<h5>Personel: @Model.Staff?.Name</h5>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">İptal Et</button>
+    <a asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+</form>

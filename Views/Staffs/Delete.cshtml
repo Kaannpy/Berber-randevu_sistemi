@@ -1,0 +1,19 @@
+@model KuaforRandevuSistemi.Models.Staff
+
+@{
+    ViewData["Title"] = "Personel Sil";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>Bu personeli silmek istediğinizden emin misiniz?</h3>
+
+<div>
+    <h4>@Model.Name</h4>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Sil</button>
+        <a asp-action="Index" class="btn btn-secondary">İptal</a>
+    </form>
+</div>

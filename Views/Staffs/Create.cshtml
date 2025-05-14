@@ -1,0 +1,17 @@
+@model KuaforRandevuSistemi.Models.Staff
+
+@{
+    ViewData["Title"] = "Yeni Personel Ekle";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Ad Soyad</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger" />
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Geri Dön</a>
+</form>

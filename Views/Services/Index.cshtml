@@ -1,0 +1,55 @@
+@model IEnumerable<KuaforRandevuSistemi.Models.Service>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Fiyat Listesi";
+    var isAdmin = User.IsInRole("Admin");
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (isAdmin)
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Yeni İşlem Ekle</a>
+    </p>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>İşlem Adı</th>
+            <th>Fiyat (₺)</th>
+            @if (isAdmin)
+            {
+                <th>İşlem</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                @if (isAdmin)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Düzenle</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Sil</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!isAdmin)
+{
+    <div class="alert alert-info mt-3">
+        <i class="fas fa-info-circle"></i> Not: Fiyat listesinde değişiklik yapma yetkisine sahip değilsiniz. Sadece admin
+        kullanıcılar hizmet ekleyebilir, düzenleyebilir veya silebilir.
+    </div>
+}

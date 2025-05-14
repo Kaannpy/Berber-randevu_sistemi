@@ -1,0 +1,164 @@
+@model KuaforRandevuSistemi.Models.Appointment
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Randevu Oluştur";
+    var userId = UserManager.GetUserId(User);
+}
+
+<div class="appointment-create-container">
+    <h2 class="mb-4">Randevu Oluştur</h2>
+
+    <form asp-action="Create" method="post" id="appointmentForm">
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        @* Kullanıcı ID'sini gizli alan olarak ekle *@
+        <input type="hidden" asp-for="UserId" value="@userId" />
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="StaffId" class="control-label">Personel</label>
+                    <select asp-for="StaffId" class="form-control" asp-items="ViewBag.Staffs" id="StaffId">
+                        <option value="">-- Seçiniz --</option>
+                    </select>
+                    <span asp-validation-for="StaffId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label asp-for="ServiceId" class="control-label">İşlem</label>
+                    <select asp-for="ServiceId" class="form-control" asp-items="ViewBag.Services">
+                        <option value="">-- Seçiniz --</option>
+                    </select>
+                    <span asp-validation-for="ServiceId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="AppointmentDate" class="control-label">Tarih ve Saat</label>
+            <input asp-for="AppointmentDate" type="datetime-local" class="form-control" id="AppointmentDate" />
+            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+        </div>
+
+        <!-- Saat seçimi için div container. JavaScript tarafından doldurulacak -->
+        <div id="timeSlotContainer" style="display: none;"></div>
+
+        <div class="appointment-preview mt-4 mb-4" id="appointmentSummary" style="display: none;">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Randevu Özeti</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Personel:</strong> <span id="previewStaff">-</span></p>
+                            <p><strong>İşlem:</strong> <span id="previewService">-</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Tarih:</strong> <span id="previewDate">-</span></p>
+                            <p><strong>Saat:</strong> <span id="previewTime">-</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-4">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-calendar-check me-1"></i> Randevu Oluştur
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Geri Dön
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Form özeti gösterme
+        function updateAppointmentSummary() {
+            const staffSelect = document.getElementById('StaffId');
+            const serviceSelect = document.getElementById('ServiceId');
+            const dateInput = document.getElementById('AppointmentDate');
+
+            if (staffSelect.value && serviceSelect.value && dateInput.value) {
+                // Değerleri al
+                const staffText = staffSelect.options[staffSelect.selectedIndex].text;
+                const serviceText = serviceSelect.options[serviceSelect.selectedIndex].text;
+
+                // dateInput.value formatı: YYYY-MM-DDThh:mm
+                const dateParts = dateInput.value.split('T');
+                const datePart = dateParts[0].split('-');
+                const timePart = dateParts[1].split(':');
+
+                // Tarih ve saat bilgilerini ayırma
+                const year = parseInt(datePart[0]);
+                const month = parseInt(datePart[1]) - 1; // JavaScript'te aylar 0-11 arası
+                const day = parseInt(datePart[2]);
+                const hours = parseInt(timePart[0]);
+                const minutes = parseInt(timePart[1]);
+
+                // Tarih nesnesi oluştur (yerel zaman diliminde)
+                const dateObj = new Date(year, month, day, hours, minutes);
+
+                // Tarih formatını ayarla
+                const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+
+                const formattedDate = dateObj.toLocaleDateString('tr-TR', dateOptions);
+                const formattedTime = dateObj.toLocaleTimeString('tr-TR', timeOptions);
+
+                // Özetleme alanlarını güncelle
+                document.getElementById('previewStaff').textContent = staffText;
+                document.getElementById('previewService').textContent = serviceText;
+                document.getElementById('previewDate').textContent = formattedDate;
+                document.getElementById('previewTime').textContent = formattedTime;
+
+                // Özeti göster
+                const summaryEl = document.getElementById('appointmentSummary');
+                KuaforApp.animations.fadeIn(summaryEl);
+            }
+        }
+
+        // Form alanları değiştiğinde özeti güncelle
+        document.getElementById('StaffId').addEventListener('change', updateAppointmentSummary);
+        document.getElementById('ServiceId').addEventListener('change', updateAppointmentSummary);
+        document.getElementById('AppointmentDate').addEventListener('change', updateAppointmentSummary);
+
+        // Formun gönderimine olay ekle
+        document.getElementById('appointmentForm').addEventListener('submit', function (e) {
+            // Form doğrulaması
+            const staffId = document.getElementById('StaffId').value;
+            const serviceId = document.getElementById('ServiceId').value;
+            const appointmentDate = document.getElementById('AppointmentDate').value;
+
+            if (!staffId || !serviceId || !appointmentDate) {
+                e.preventDefault();
+                alert('Lütfen tüm alanları doldurun.');
+                return false;
+            }
+
+            // Randevu tarihinin bugünden sonra olduğunu kontrol et
+            const selectedDate = new Date(appointmentDate);
+            const today = new Date();
+
+            if (selectedDate < today) {
+                e.preventDefault();
+                alert('Geçmiş bir tarihe randevu oluşturamazsınız.');
+                return false;
+            }
+
+            return true;
+        });
+    </script>
+}

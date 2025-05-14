@@ -1,0 +1,53 @@
+@model IEnumerable<KuaforRandevuSistemi.Models.Staff>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Personel Listesi";
+    var isAdmin = User.IsInRole("Admin");
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (isAdmin)
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Yeni Personel</a>
+    </p>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ad Soyad</th>
+            @if (isAdmin)
+            {
+                <th>İşlemler</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <td>@personel.Name</td>
+                @if (isAdmin)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@personel.Id" class="btn btn-warning btn-sm">Düzenle</a>
+                        <a asp-action="Delete" asp-route-id="@personel.Id" class="btn btn-danger btn-sm">Sil</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!isAdmin)
+{
+    <div class="alert alert-info mt-3">
+        <i class="fas fa-info-circle"></i> Not: Personel listesinde değişiklik yapma yetkisine sahip değilsiniz. Sadece
+        admin kullanıcılar personel ekleyebilir, düzenleyebilir veya silebilir.
+    </div>
+}

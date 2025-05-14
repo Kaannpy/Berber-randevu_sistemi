@@ -1,0 +1,207 @@
+@{
+    ViewData["Title"] = "Hakkımızda";
+}
+
+<div class="about-page">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-12 text-center">
+                <h1 class="mb-4">Anatolian Kaan Berber Hakkında</h1>
+                <p class="lead">
+                    2020 yılından bu yana kaliteli hizmet anlayışıyla müşterilerimize en iyi kuaförlük hizmetini
+                    sunuyoruz.
+                </p>
+            </div>
+        </div>
+
+        <div class="row mb-5 align-items-center">
+            <div class="col-md-6">
+                <div class="about-image">
+                    <img src="~/images/barber-pattern.png" alt="Anatolian Kaan Berber"
+                        class="img-fluid rounded shadow-lg" id="shopImage">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about-content">
+                    <h2 class="mb-3">Hikayemiz</h2>
+                    <p>
+                        Anatolian Kaan Berber, 2020 yılında kuaförlük mesleğinde uzun yıllar deneyim kazanmış Kaan
+                        Pey tarafından kurulmuştur.
+                        Amacımız, geleneksel berberlik hizmetlerini modern yaklaşımla birleştirerek müşterilerimize
+                        unutulmaz bir deneyim sunmaktır.
+                    </p>
+                    <p>
+                        Salonumuzda kaliteli ürünler kullanarak müşterilerimizin saç ve sakal bakımlarını en iyi şekilde
+                        yapmaktayız.
+                        Teknolojik gelişmeleri takip ederek hizmet kalitemizi sürekli artırıyoruz.
+                    </p>
+                    <p>
+                        Genç ve dinamik ekibimiz, alanında uzmanlaşmış profesyonellerden oluşmaktadır.
+                        Her müşterimize özel ilgi göstererek, ihtiyaçlarına en uygun hizmeti sunmayı hedefliyoruz.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="text-center mb-4">Değerlerimiz</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="fas fa-medal fa-3x text-primary"></i>
+                                </div>
+                                <h4 class="card-title">Kalite</h4>
+                                <p class="card-text">En kaliteli ürünleri kullanarak, en iyi hizmeti sunmak için sürekli
+                                    kendimizi geliştiriyoruz.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="fas fa-heart fa-3x text-danger"></i>
+                                </div>
+                                <h4 class="card-title">Müşteri Memnuniyeti</h4>
+                                <p class="card-text">Her müşterimizin memnuniyeti bizim için en önemli başarı
+                                    kriteridir.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="icon-wrapper mb-3">
+                                    <i class="fas fa-sync-alt fa-3x text-success"></i>
+                                </div>
+                                <h4 class="card-title">Sürekli Gelişim</h4>
+                                <p class="card-text">Kendimizi sürekli geliştirerek, en yeni trendleri ve teknikleri
+                                    uyguluyoruz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="text-center mb-4">Ekibimiz</h2>
+                <div class="row" id="teamContainer">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Bize Ulaşın</h3>
+                        <ul class="list-unstyled contact-info">
+                            <li class="mb-3">
+                                <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                                <span>İstanbul, Türkiye</span>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-phone me-2 text-primary"></i>
+                                <span>0553 586 5770</span>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-envelope me-2 text-primary"></i>
+                                <span>info@anatoliankaanberber.com</span>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-clock me-2 text-primary"></i>
+                                <span>Pazar hariç 10:00-22:00</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const teamMembers = [
+                {
+                    name: "Kaan Pey",
+                    position: "Kurucu ve Baş Berber",
+                    image: "/images/kaanpey.jpg",
+                    description: "10 yıllık deneyime sahip, saç ve sakal modelleri konusunda uzman."
+                },
+                {
+                    name: "Efe Gümüş",
+                    position: "Kıdemli Berber",
+                    image: "/images/efe.jpg",
+                    description: "Klasik erkek saç modelleri ve sakal şekillendirme konusunda uzman."
+                },
+                {
+                    name: "Emirhan Gören",
+                    position: "Berber",
+                    image: "/images/emirhan.jpg",
+                    description: "Modern trendleri yakından takip eden genç ve yetenekli berberimiz."
+                },
+                {
+                    name: "Tuğberk Soytürk",
+                    position: "Berber",
+                    image: "/images/tugberk.jpg",
+                    description: "Modern trendleri yakından takip eden genç ve yetenekli berberimiz."
+                },
+                {
+                    name: "Kaan Gür",
+                    position: "Berber",
+                    image: "/images/kaangür.jpg",
+                    description: "Modern trendleri yakından takip eden genç ve yetenekli berberimiz."
+                }
+            ];
+
+            const teamContainer = document.getElementById('teamContainer');
+
+            teamMembers.forEach(member => {
+                const memberHTML = `
+                            <div class="col-md-4 mb-4">
+                                <div class="card team-card h-100 border-0 shadow-sm">
+                                    <div class="card-body text-center">
+                                        <div class="team-image mb-3">
+                                            <img src="${member.image}" alt="${member.name}" 
+                                                 class="img-fluid rounded-circle team-member-image"
+                                                 onerror="this.src='/images/barber-pattern.png'">
+                                        </div>
+                                        <h4 class="card-title">${member.name}</h4>
+                                        <p class="card-subtitle text-muted mb-2">${member.position}</p>
+                                        <p class="card-text">${member.description}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                teamContainer.innerHTML += memberHTML;
+            });
+
+            const shopImage = document.getElementById('shopImage');
+            shopImage.onerror = function () {
+                this.src = '/images/barber-pattern.png';
+            };
+
+            if (typeof KuaforApp !== 'undefined' && KuaforApp.animations) {
+                const elements = document.querySelectorAll('.about-content h2, .about-content p, .card');
+
+                elements.forEach((element, index) => {
+                    element.style.opacity = '0';
+                    setTimeout(() => {
+                        element.style.transition = 'opacity 0.8s ease-in-out';
+                        element.style.opacity = '1';
+                    }, 100 * (index + 1));
+                });
+            }
+        });
+    </script>
+}
